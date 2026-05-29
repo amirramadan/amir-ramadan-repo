@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Pattern Mapping Report</title>
+    <style>
+      body {
+        margin: 0;
+        background: #070706;
+        color: #f8edcf;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      .fallback {
+        width: min(760px, calc(100% - 32px));
+        margin: 80px auto;
+        padding: 24px;
+        background: #14130f;
+        border: 1px solid rgba(214, 174, 92, 0.28);
+        border-radius: 8px;
+      }
+
+      h1 {
+        color: #f2d38a;
+        margin-top: 0;
+      }
+
+      a {
+        color: #f2d38a;
+      }
+    </style>
+  </head>
+  <body>
+      <script>
+      const report = localStorage.getItem("aiPatternReportHtml");
+
+      if (report && report.length > 1000) {
+        document.open();
+        document.write(report);
+        document.close();
+      }
+    </script>
+  </body>
+</html>

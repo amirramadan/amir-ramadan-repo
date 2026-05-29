@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Project Pattern Navigator</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="shell">
+      <section class="hero">
+        <div>
+          <p class="eyebrow">PMI Seven AI Project Patterns</p>
+          <h1>AI Project Pattern Navigator</h1>
+          <p class="intro">
+            Describe the toughest workplace issue you are facing. The advisor will
+            interview you, score the seven AI patterns, and turn the result into a
+            practical project starting point.
+          </p>
+        </div>
+        <div class="hero-panel" aria-label="Current advisor state">
+          <span class="status-dot"></span>
+          <div>
+            <strong id="agentState">Ready to diagnose</strong>
+            <span id="agentHint">Start with the issue, then refine with the guided choices.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="workspace">
+        <form class="advisor" id="advisorForm">
+          <div class="step-header">
+            <span class="step-mark">1</span>
+            <div>
+              <h2>Frame the challenge</h2>
+              <p>Use plain workplace language. The more specific the pain, the sharper the pattern match.</p>
+            </div>
+          </div>
+
+          <label class="field">
+            <span>Highest challenging issue</span>
+            <textarea
+              id="issue"
+              rows="7"
+              placeholder="Example: Our support team cannot keep up with complex customer questions, and handoffs are slow because knowledge is spread across documents and experts."
+            ></textarea>
+          </label>
+
+          <div class="grid-two">
+            <label class="field">
+              <span>Workplace area</span>
+              <input id="area" type="text" placeholder="Operations, PMO, HR, finance, sales..." />
+            </label>
+            <label class="field">
+              <span>Main business impact</span>
+              <input id="impact" type="text" placeholder="Delay, cost, quality, risk, adoption..." />
+            </label>
+          </div>
+
+          <div class="step-header compact">
+            <span class="step-mark">2</span>
+            <div>
+              <h2>What should AI help with?</h2>
+              <p>Select every statement that feels true.</p>
+            </div>
+          </div>
+
+          <div class="chip-grid" id="outcomes"></div>
+
+          <div class="step-header compact">
+            <span class="step-mark">3</span>
+            <div>
+              <h2>What data is available?</h2>
+              <p>Good pattern selection depends heavily on the shape and quality of data.</p>
+            </div>
+          </div>
+
+          <div class="chip-grid data" id="dataSignals"></div>
+
+          <div class="range-panel">
+            <label>
+              <span>How much should the AI act by itself?</span>
+              <output id="autonomyLabel">Recommend only</output>
+              <input id="autonomy" type="range" min="0" max="4" step="1" value="1" />
+            </label>
+            <div class="scale">
+              <span>Human decides</span>
+              <span>AI executes within boundaries</span>
+            </div>
+          </div>
+
+          <div class="actions">
+            <button class="primary" type="button" id="diagnoseBtn">Diagnose pattern</button>
+            <button class="secondary" type="button" id="resetBtn">Reset</button>
+          </div>
+        </form>
+
+        <aside class="results" aria-live="polite">
+          <div class="result-top">
+            <p class="eyebrow">Recommended Pattern</p>
+            <h2 id="topPattern">Awaiting your challenge</h2>
+            <p id="topSummary">Your recommendation will appear as soon as you describe the issue.</p>
+          </div>
+
+          <div class="confidence">
+            <div>
+              <span>Confidence</span>
+              <strong id="confidenceText">0%</strong>
+            </div>
+            <meter id="confidenceMeter" min="0" max="100" value="0"></meter>
+          </div>
+
+          <div class="tabs" role="tablist" aria-label="Recommendation details">
+            <button type="button" class="tab active" data-tab="brief">Brief</button>
+            <button type="button" class="tab" data-tab="readiness">Readiness</button>
+            <button type="button" class="tab" data-tab="compare">Compare</button>
+          </div>
+
+          <section class="tab-panel active" id="briefPanel">
+            <h3>Project brief</h3>
+            <dl class="brief-list">
+              <div>
+                <dt>Use when</dt>
+                <dd id="useWhen">Describe a challenge to generate a focused brief.</dd>
+              </div>
+              <div>
+                <dt>Data to look for</dt>
+                <dd id="dataNeeds">The advisor will map your inputs to PMI data considerations.</dd>
+              </div>
+              <div>
+                <dt>People to involve</dt>
+                <dd id="peopleNeeds">Stakeholder perspectives will appear here.</dd>
+              </div>
+              <div>
+                <dt>Responsible use</dt>
+                <dd id="responsibleUse">Responsible-use guardrails will appear here.</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="tab-panel" id="readinessPanel">
+            <h3>First project moves</h3>
+            <ol id="nextMoves" class="next-moves">
+              <li>Enter a workplace issue to receive the first recommended moves.</li>
+            </ol>
+          </section>
+
+          <section class="tab-panel" id="comparePanel">
+            <h3>Pattern scores</h3>
+            <div id="scoreList" class="score-list"></div>
+          </section>
+
+          <div class="export-row">
+            <button class="secondary" type="button" id="copyBtn">Copy brief</button>
+            <button class="secondary" type="button" id="downloadBtn">Download report</button>
+            <button class="secondary" type="button" id="printBtn">Print</button>
+          </div>
+        </aside>
+      </section>
+
+      <section class="library">
+        <div class="library-head">
+          <p class="eyebrow">Pattern Library</p>
+          <h2>Seven options the advisor can recommend</h2>
+        </div>
+        <div class="pattern-grid" id="patternGrid"></div>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">Brief copied</div>
+    <script src="app.js"></script>
+  </body>
+</html>
