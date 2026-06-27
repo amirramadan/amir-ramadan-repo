@@ -1,6 +1,6 @@
 # AI Project Pattern Navigator
 
-This is a local browser-based advisor for helping AI enthusiasts identify which
+This is a local browser-based advisor for helping CEOs, PMs, AI Transformation leaders, Team members identify which
 PMI Seven AI Project Pattern best fits a difficult workplace issue.
 
 ## Open the tool
